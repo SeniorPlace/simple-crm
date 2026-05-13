@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SimpleCRM Take-Home</title>
+<style>
+  :root {
+    --ink: #15181d;
+    --muted: #5b6470;
+    --line: #e5e8ec;
+    --accent: #2954c8;
+    --accent-soft: #eef2fb;
+    --bg: #fafafa;
+    --code-bg: #f3f4f6;
+    --warn-bg: #fff8e6;
+    --warn-line: #f0d488;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font: 16px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+  header { margin-bottom: 40px; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    color: var(--accent);
+    font-weight: 600;
+    margin: 0 0 8px;
+  }
+  h1 {
+    font-size: 32px;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    letter-spacing: -0.01em;
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0;
+  }
+  h2 {
+    font-size: 22px;
+    margin: 48px 0 12px;
+    letter-spacing: -0.01em;
+  }
+  h3 {
+    font-size: 16px;
+    margin: 24px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  p, ul, ol { margin: 12px 0; }
+  ul, ol { padding-left: 22px; }
+  li { margin: 6px 0; }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid currentColor; }
+  a:hover { opacity: 0.8; }
+  code {
+    background: var(--code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font: 13.5px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  pre {
+    background: var(--code-bg);
+    padding: 14px 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font: 13.5px/1.45 ui-monospace, SFMono-Regular, Menlo, monospace;
+    margin: 12px 0;
+  }
+  pre code { background: none; padding: 0; }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--line);
+    margin: 48px 0;
+  }
+  .callout {
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    padding: 14px 18px;
+    border-radius: 4px;
+    margin: 20px 0;
+  }
+  .callout p:first-child { margin-top: 0; }
+  .callout p:last-child { margin-bottom: 0; }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 20px 0 0;
+  }
+  .meta span {
+    font-size: 13px;
+    padding: 4px 10px;
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    color: var(--muted);
+  }
+  .meta span strong { color: var(--ink); font-weight: 600; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 14.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.04em; }
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="eyebrow">Take-home exercise</p>
+    <h1>SimpleCRM: Monthly Forecast</h1>
+    <p class="lede">Build a forecast feature for a small CRM.</p>
+    <div class="meta">
+      <span><strong>Time</strong> ~60 minutes</span>
+      <span><strong>Stack</strong> React + TypeScript + Express + SQLite</span>
+    </div>
+  </header>
+
+  <div class="callout">
+    <p><strong>Heads up.</strong> This is a fake codebase with no history, but the tradeoffs in it are examples of real ones: stuff shipped before the requirements were nailed down, edges nobody got back to, choices that aged poorly. Tell us what you&rsquo;d change about it (and what you&rsquo;d leave alone) in your writeup.</p>
+  </div>
+
+  <h2>The setting</h2>
+  <p>SimpleCRM is the in-house sales tool for a small company that makes widgets. Sales reps use it to track potential customers (<strong>leads</strong>), the deals they&rsquo;re working (<strong>opportunities</strong>), and where each deal sits in the pipeline. A typical widget sale runs several months: first contact, conversations, demo, negotiation, signed contract.</p>
+  <p>Day-to-day contact management is rough. Bonus points if you make it less painful. But the real ask is <strong>reports and projections</strong>. The team needs to see where their pipeline is concentrated and where revenue is likely to land. Focus there.</p>
+
+  <h2>What you&rsquo;re building</h2>
+  <p>Four user stories. Each notes what&rsquo;s already there and what to add.</p>
+  <ol>
+    <li>
+      <strong>Close date on opportunities.</strong> As a sales rep, I want each opportunity to carry an expected close date, so the team can forecast against it.
+      <p>The opportunity data model doesn&rsquo;t have a close date today. You&rsquo;ll need to add the column, the API plumbing, and a way to set it in the UI. Existing opportunities won&rsquo;t have one until someone fills it in; how you handle that is up to you.</p>
+    </li>
+    <li>
+      <strong>Add and edit opportunities in the UI, including their custom fields.</strong> As a sales rep, I want to add new deals and edit existing ones from the browser, including the custom fields we tag them with for reporting.
+      <p>There&rsquo;s no opportunity create/edit UI today: under a lead you can see existing opportunities and delete them, but that&rsquo;s it. The backend <code>POST</code> and <code>PUT</code> endpoints already accept everything you&rsquo;d need to send. Custom-field definitions (under <em>Settings &rsaquo; Manage Custom Fields</em>) already include opportunity-scoped fields, and the seeded opportunities already have values in some of them. You just can&rsquo;t see or edit those values in the UI yet.</p>
+    </li>
+    <li>
+      <strong>Monthly forecast.</strong> As a sales manager, I want a page that buckets open opportunities by the month they&rsquo;re expected to close, so I can see what&rsquo;s likely to land per month.
+      <p>New page. Six buckets for the next six calendar months, one for opportunities whose close date is already in the past, and one for opportunities more than six months out. Per bucket, show at least a count and a total expected value. Decide what to do with opportunities that have no close date, and with opportunities you don&rsquo;t consider open.</p>
+    </li>
+    <li>
+      <strong>Group the forecast by a custom field.</strong> As a sales manager, I want to split each month-bucket by the value of an opportunity custom field (e.g.&nbsp;region), so I can see where my pipeline is concentrated.
+      <p>Add a control to the forecast page that lets me pick which opportunity-scoped custom field to group by, or no grouping. Opportunities that don&rsquo;t have a value for the chosen field still need to land somewhere visible.</p>
+    </li>
+  </ol>
+
+  <hr />
+
+  <h2>Setup</h2>
+  <p>Clone the repo and run the dev server:</p>
+  <pre><code>git clone https://github.com/SeniorPlace/simple-crm.git
+cd simple-crm
+npm install
+npm run dev</code></pre>
+  <p>That single command starts both processes:</p>
+  <ul>
+    <li><strong>API</strong>: Express + TypeORM + SQLite at <code>http://localhost:3000</code></li>
+    <li><strong>Client</strong>: React + Vite at <code>http://localhost:5173</code> (proxies <code>/api/*</code> to the API)</li>
+  </ul>
+  <p>Open the client URL in your browser. The database seeds itself on first boot with a handful of leads, stages, and opportunities, plus a couple of pre-defined custom fields.</p>
+
+  <h3>Layout</h3>
+  <pre><code>code/
+  client/   React + Vite frontend
+  server/   Express + TypeORM API</code></pre>
+
+  <hr />
+
+  <h2>What to send us</h2>
+  <p>When you&rsquo;re done, email <strong>both</strong> of these addresses:</p>
+  <ul>
+    <li><a href="mailto:hiring@seniorplace.com">hiring@seniorplace.com</a></li>
+    <li><a href="mailto:jd@seniorplace.com">jd@seniorplace.com</a></li>
+  </ul>
+  <p>Pick whichever submission style you prefer:</p>
+  <ol>
+    <li><strong>Publish your code.</strong> Push to a public GitHub or GitLab repo and put the link in the email.</li>
+    <li><strong>Send an archive.</strong> If you&rsquo;d rather keep things on the DL, attach a zip or tar of the repo to the email.</li>
+  </ol>
+  <p>Include a short writeup in the email body. This is how we&rsquo;ll understand your choices, so spend a few minutes on it. Tell us:</p>
+  <ul>
+    <li>What you built, and what you skipped</li>
+    <li>What you&rsquo;d change about the existing codebase if it were yours</li>
+    <li>What you&rsquo;d do next if you had another hour</li>
+    <li>Anything that surprised or annoyed you, or that you&rsquo;d push back on</li>
+  </ul>
+
+  <hr />
+
+  <h2>FAQ</h2>
+
+  <h3>Do you care about styling?</h3>
+  <p>This is a full-stack role, and attention to detail on the frontend matters. The forecast page should look like something you&rsquo;d put in front of a user. Pixel-perfect isn&rsquo;t required, but &ldquo;shoved everything in a list and called it done&rdquo; isn&rsquo;t enough.</p>
+
+  <h3>Do I need to write tests?</h3>
+  <p>Do what you&rsquo;d do in your normal day-to-day work. We&rsquo;re interested in your thought process about which tests you choose to write and which you skip. Mention it in your writeup.</p>
+
+  <h3>What if I don&rsquo;t finish?</h3>
+  <p>Don&rsquo;t worry about it. Submit what you have, plus a paragraph on what you&rsquo;d do next. Most candidates don&rsquo;t finish, that&rsquo;s expected.</p>
+
+  <h3>Can I change parts of the existing codebase?</h3>
+  <p>If you&rsquo;d change something at your job, change it here. We want to see how you actually work.</p>
+
+  <h3>What if I find a bug?</h3>
+  <p>Decide whether to fix it, work around it, or just note it. Tell us why in your writeup.</p>
+
+  <h3>How do I submit?</h3>
+  <p>Email <a href="mailto:hiring@seniorplace.com">hiring@seniorplace.com</a> and <a href="mailto:jd@seniorplace.com">jd@seniorplace.com</a> with either a link to your public repo or an attached archive, plus your writeup in the email body.</p>
+
+  <footer>
+    Questions? Email <a href="mailto:hiring@seniorplace.com">hiring@seniorplace.com</a>. We&rsquo;re happy to clarify anything ambiguous, and you don&rsquo;t lose points for asking.
+  </footer>
+</main>
+</body>
+</html>
